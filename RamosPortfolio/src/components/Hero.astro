@@ -44,7 +44,7 @@ import avatarImg from "../assets/ramos.png";
   .hero-label {
     display: block;
     font-family: monospace;
-    font-size: 0.75rem;
+    font-size: 1rem;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--accent);
@@ -64,7 +64,7 @@ import avatarImg from "../assets/ramos.png";
   .hero-role {
     font-family: monospace;
     font-size: 0.85rem;
-    color: var(--text-muted);
+    color: var(--text-primary);
     letter-spacing: 0.04em;
     margin-top: 1rem;
   }
@@ -83,8 +83,9 @@ import avatarImg from "../assets/ramos.png";
     font-size: 0.7rem;
     letter-spacing: 0.06em;
     padding: 4px 12px;
-    border: 1px solid var(--border);
-    color: var(--accent);
+    border: 1px solid color-mix(in srgb, var(--accent) 50%, transparent);
+    color: var(--text-primary);
+    background: color-mix(in srgb, var(--accent) 8%, transparent);
     border-radius: 4px;
     cursor: pointer;
   }

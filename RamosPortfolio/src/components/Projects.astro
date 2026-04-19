@@ -1,0 +1,299 @@
+---
+import previewReceiteMe from "../assets/projects/ReceiteMeProject.png";
+import previewAryaInstallAutomation from "../assets/projects/AryaInstallProject.png"
+
+const projects = [
+    {
+        num: "01",
+        name: "ReceiteMe ",
+        desc: "Projeto desenvolvido como Trabalho de Conclusão de Curso (TCC) no curso técnico em Informática.",
+        stack: ["PHP", "MySql", "Laragon", "Web1"],
+        github: "https://github.com/Ramos902/ReceiteMe-Web",
+        demo: null,
+        preview: previewReceiteMe,
+    },
+    {
+        num: "02",
+        name: "Arya Install Automation",
+        desc: "Script PowerShell de automação para instalação e inicialização do software Arya (Pixeon), desenvolvido para uso interno no Hospital Dr. Léo Orsi Bernardes.",
+        stack: ["PowerShell", "Batch Script", "VBScript"],
+        github: "https://github.com/Ramos902/AryaSuiteInstall-Script",
+        demo: null,
+        preview: previewAryaInstallAutomation,
+    },
+    {
+        num: "03",
+        name: "ReadShelf (Em Andamento)",
+        desc: "Plataforma web de gerenciamento e leitura de PDFs, pensado como uma estante digital pessoal, onde o usuário pode armazenar, organizar e acessar seus documentos de forma simples e eficiente.",
+        stack: ["C#.NET API", "Angular", "Postgress"],
+        github: "https://github.com/Ramos902",
+        demo: "https://",
+        preview: null,
+    },
+];
+---
+
+<section class="projetos" id="projetos">
+    <div class="container projetos-inner">
+        <span class="section-label">Projetos</span>
+        <div class="projetos-grid">
+            {
+                projects.map((project) => (
+                    <div class="pj-card">
+                        <div class="pj-shine" />
+                        <div class="pj-img">
+                            {project.preview ? (
+                                <img
+                                    src={project.preview.src}
+                                    alt={`Preview ${project.name}`}
+                                />
+                            ) : (
+                                <span class="pj-placeholder">preview</span>
+                            )}
+                            <span class="pj-num">{project.num}</span>
+                        </div>
+                        <div class="pj-body">
+                            <h3 class="pj-name">{project.name}</h3>
+                            <p class="pj-desc">{project.desc}</p>
+                            <div class="pj-stack">
+                                {project.stack.map((tag) => (
+                                    <span class="pj-tag">{tag}</span>
+                                ))}
+                            </div>
+                            <div class="pj-links">
+                                <a
+                                    href={project.github}
+                                    class="pj-link"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    GitHub
+                                </a>
+                                {project.demo && (
+                                    <a
+                                        href={project.demo}
+                                        class="pj-link"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
+                                        Demo
+                                    </a>
+                                )}
+                            </div>
+                        </div>
+                    </div>
+                ))
+            }
+        </div>
+    </div>
+</section>
+
+<style>
+    .projetos {
+        padding: 8rem 0;
+        border-top: 1px solid var(--border);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+    }
+
+    .projetos-inner {
+        width: 100%;
+    }
+
+    .section-label {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-family: monospace;
+        font-size: 1rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 3rem;
+    }
+
+    .section-label::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: var(--border);
+    }
+    .section-label::before {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: var(--border);
+    }
+
+    .projetos-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
+
+    .pj-card {
+        background: var(--bg-secondary);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        overflow: hidden;
+        transform-style: preserve-3d;
+        transition:
+            border-color 0.3s ease,
+            box-shadow 0.4s ease;
+        position: relative;
+    }
+
+    .pj-card:hover {
+        border-color: var(--accent);
+        box-shadow: 0 20px 60px
+            color-mix(in srgb, var(--accent) 10%, transparent);
+    }
+
+    .pj-shine {
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 60%;
+        height: 100%;
+        background: linear-gradient(
+            90deg,
+            transparent,
+            color-mix(in srgb, var(--accent) 4%, transparent),
+            transparent
+        );
+        transition: left 0.5s ease;
+        pointer-events: none;
+        z-index: 1;
+    }
+
+    .pj-card:hover .pj-shine {
+        left: 150%;
+    }
+
+    .pj-img {
+        width: 100%;
+        height: 150px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        border-bottom: 1px solid var(--border);
+    }
+    .pj-img img {
+        padding: 2%;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+
+    .pj-placeholder {
+        font-family: monospace;
+        font-size: 11px;
+        color: var(--border);
+        letter-spacing: 0.1em;
+    }
+
+    .pj-num {
+        position: absolute;
+        top: 12px;
+        right: 14px;
+        font-family: monospace;
+        font-size: 10px;
+        color: var(--border);
+    }
+
+    .pj-body {
+        padding: 22px;
+    }
+
+    .pj-name {
+        font-family: "Georgia", serif;
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        margin-bottom: 10px;
+    }
+
+    .pj-desc {
+        font-size: 0.82rem;
+        color: var(--text-muted);
+        line-height: 1.75;
+        margin-bottom: 18px;
+    }
+
+    .pj-stack {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-bottom: 18px;
+    }
+
+    .pj-tag {
+        font-family: monospace;
+        font-size: 0.68rem;
+        padding: 3px 10px;
+        border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+        color: var(--text-primary);
+        background: color-mix(in srgb, var(--accent) 8%, transparent);
+        border-radius: 4px;
+    }
+
+    .pj-links {
+        display: flex;
+        gap: 10px;
+    }
+
+    .pj-link {
+        font-family: monospace;
+        font-size: 0.68rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        padding: 7px 16px;
+        border: 1px solid var(--border);
+        color: var(--text-muted);
+        border-radius: 5px;
+        transition:
+            border-color 0.2s ease,
+            color 0.2s ease;
+    }
+
+    .pj-link:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+    }
+
+    @media (max-width: 900px) {
+        .projetos-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (max-width: 600px) {
+        .projetos-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+
+<script>
+    document.querySelectorAll(".pj-card").forEach((card) => {
+        const el = card as HTMLElement;
+
+        el.addEventListener("mousemove", (e: MouseEvent) => {
+            const rect = el.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const cx = rect.width / 2;
+            const cy = rect.height / 2;
+            const rotateX = ((y - cy) / cy) * -7;
+            const rotateY = ((x - cx) / cx) * 7;
+            el.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(8px)`;
+        });
+
+        el.addEventListener("mouseleave", () => {
+            el.style.transform =
+                "perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(0px)";
+        });
+    });
+</script>
