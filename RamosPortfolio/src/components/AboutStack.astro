@@ -1,0 +1,298 @@
+---
+const navLinks = [
+  {
+    label: "LinkedIn",
+    href: "https://linkedin.com/in/seu-usuario",
+    external: true,
+  },
+  { label: "GitHub", href: "https://github.com/Ramos902", external: true },
+  { label: "Download CV", href: "/cv-ramos.pdf", download: true },
+];
+
+const stack = [
+  {
+    name: "C# .NET",
+    pct: 85,
+    desc: "APIs REST, Entity Framework e arquitetura em camadas.",
+  },
+  {
+    name: "Angular",
+    pct: 75,
+    desc: "Componentes, serviços e integração com APIs backend.",
+  },
+  {
+    name: "PostgreSQL",
+    pct: 80,
+    desc: "Modelagem relacional, queries e otimização.",
+  },
+  { name: "Docker", pct: 70, desc: "Containerização e docker-compose." },
+  {
+    name: "HTML + CSS + JS",
+    pct: 90,
+    desc: "Layouts responsivos, Grid, Flexbox e DOM.",
+  },
+  {
+    name: "Git",
+    pct: 88,
+    desc: "Versionamento, branching e fluxo colaborativo.",
+  },
+];
+---
+
+<section class="sobre" id="sobre">
+  <div class="container sobre-inner">
+    <div class="sobre-grid">
+      <div class="bloco-sobre">
+        <span class="section-label-sobre">Sobre</span>
+        <p class="sobre-texto">
+          Desenvolvedor em formação com foco em backend utilizando .NET (C#),
+          com experiência na construção de APIs, manipulação de banco de dados
+          SQL e integração com interfaces web. Possuo conhecimentos em frontend
+          com framworks Astro e Angular, buscando evoluir para construção de
+          sistemas completos e escaláveis. Atualmente desenvolvendo projetos
+          próprios.
+        </p>
+        <div class="sobre-links">
+          {
+            navLinks.map((item) => (
+              <a
+                href={item.href}
+                class={`sobre-btn${item.label === "LinkedIn" ? " primary" : ""}`}
+                target={item.external ? "_blank" : undefined}
+                rel={item.external ? "noopener noreferrer" : undefined}
+                download={item.download ? true : undefined}
+              >
+                {item.label}
+              </a>
+            ))
+          }
+        </div>
+      </div>
+
+      <div class="divider-vertical"></div>
+
+      <div class="bloco-stack">
+        <span class="section-label-stack">Stack</span>
+        <div class="stack-grid">
+          {
+            stack.map((item) => (
+              <div class="stack-card" style={`--pct: ${item.pct}%`}>
+                <div class="card-top">
+                  <span class="card-name">{item.name}</span>
+                  <span class="card-pct">{item.pct}%</span>
+                </div>
+                <div class="card-track">
+                  <div class="card-bar" />
+                </div>
+                <p class="card-desc">{item.desc}</p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .sobre {
+    min-height: 100dvh;
+    display: flex;
+    align-items: center;
+    border-top: 1px solid var(--border);
+  }
+
+  .sobre-inner {
+    width: 100%;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+
+  .sobre-grid {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 4rem;
+  }
+
+  .section-label-sobre,
+  .section-label-stack {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 2rem;
+  }
+
+  .section-label-stack::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .section-label-sobre::before {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .sobre-texto {
+    color: var(--text-muted);
+    font-size: 1.05rem;
+    line-height: 1.9;
+    margin-bottom: 2.5rem;
+    text-align: end;
+  }
+
+  .sobre-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .sobre-btn {
+    font-family: monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 10px 22px;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    border-radius: 6px;
+    transition:
+      border-color 0.2s ease,
+      color 0.2s ease;
+  }
+
+  .sobre-btn:hover,
+  .sobre-btn.primary {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .divider-vertical {
+    width: 1px;
+    height: 60%;
+    background: var(--border);
+    align-self: center;
+  }
+
+  .stack-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .stack-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 18px;
+    cursor: default;
+    transition: border-color 0.2s ease;
+    height: 80px;
+    overflow: hidden;
+    transition:
+      height 0.3s ease,
+      border-color 0.2s ease;
+  }
+
+  .stack-card:hover {
+    border-color: var(--accent);
+    height: 130px;
+  }
+
+  .card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+  }
+
+  .card-name {
+    font-family: monospace;
+    font-size: 0.85rem;
+    color: var(--text-primary);
+    letter-spacing: 0.03em;
+  }
+
+  .card-pct {
+    font-family: monospace;
+    font-size: 0.75rem;
+    color: var(--accent);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+
+  .stack-card:hover .card-pct {
+    opacity: 1;
+  }
+
+  .card-track {
+    height: 2px;
+    background: var(--border);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .card-bar {
+    height: 100%;
+    width: 0%;
+    background: var(--accent);
+    border-radius: 2px;
+    transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .stack-card:hover .card-bar {
+    width: var(--pct);
+  }
+
+  .card-desc {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-top: 10px;
+    line-height: 1.6;
+    opacity: 0;
+    transition:
+      max-height 0.3s ease,
+      opacity 0.3s ease;
+  }
+
+  .stack-card:hover .card-desc {
+    opacity: 1;
+  }
+
+  @media (max-width: 768px) {
+    .sobre-grid {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+
+    .section-label-sobre::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+    
+    .section-label-stack::before {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .divider-vertical {
+      display: none;
+    }
+
+    .stack-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

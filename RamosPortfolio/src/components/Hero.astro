@@ -1,0 +1,144 @@
+---
+import avatarImg from "../assets/ramos.png";
+---
+
+<section id="hero" class="hero">
+  <div class="container hero-content">
+    <div class="hero-text">
+      <span class="hero-label">Backend Developer</span>
+      <h1>
+        João Pedro<br />
+        <span class="highlight">Ramos</span> Moraes
+      </h1>
+      <p class="hero-role">C# .NET Backend Developer | Técnico em T.I</p>
+      <ul class="hero-stack">
+        <li>C#</li>
+        <li>.NET</li>
+        <li>PostgreSQL</li>
+        <li>Angular</li>
+      </ul>
+      <a href="#projetos" class="btn hero-btn">Ver Projetos</a>
+    </div>
+    <div class="hero-avatar">
+      <img src={avatarImg.src} alt="Foto Ramos" />
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+  }
+
+  .hero-content {
+    max-width: 900px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .hero-label {
+    display: block;
+    font-family: monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.25rem;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.4rem, 5vw, 3.8rem);
+    font-weight: 700;
+    line-height: 1.1;
+  }
+
+  .highlight {
+    color: var(--accent);
+  }
+
+  .hero-role {
+    font-family: monospace;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    letter-spacing: 0.04em;
+    margin-top: 1rem;
+  }
+
+  .hero-stack {
+    list-style: none;
+    padding: 0;
+    margin: 1.5rem 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .hero-stack li {
+    font-family: monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    padding: 4px 12px;
+    border: 1px solid var(--border);
+    color: var(--accent);
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .hero-stack li:hover {
+    background: var(--bg-secondary);
+  }
+
+  .hero-btn {
+    display: inline-block;
+    margin-top: 2rem;
+    padding: 11px 26px;
+    background: transparent;
+    border: 1.5px solid var(--accent);
+    color: var(--accent);
+    font-family: monospace;
+    font-size: 0.8rem;
+    letter-spacing: 0.06em;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 400;
+    transition: background 0.2s ease;
+  }
+
+  .hero-btn:hover {
+    background: color-mix(in srgb, var(--accent) 8%, transparent);
+  }
+
+  .hero-avatar {
+    width: 300px;
+    border-radius: 15%;
+    height: auto;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+
+  .hero-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  @media (max-width: 768px) {
+    .hero-content {
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+
+    .hero-avatar {
+      display: none;
+    }
+
+    .hero-stack {
+      justify-content: center;
+    }
+  }
+</style>
