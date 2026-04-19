@@ -3,7 +3,4 @@ import { defineConfig } from 'astro/config';
 export default defineConfig({
   site: 'https://ramos902.github.io',
   base: import.meta.env.PROD ? '/Portfolio' : '/',
-  redirects: {
-    '/': '/portfolio',
-  },
 });
