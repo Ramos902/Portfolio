@@ -142,7 +142,7 @@ const stack = [
   }
 
   .sobre-texto {
-    color: var(--text-muted);
+    color: var(--text-primary);
     font-size: 1.05rem;
     line-height: 1.9;
     margin-bottom: 2.5rem;
@@ -151,6 +151,7 @@ const stack = [
 
   .sobre-links {
     display: flex;
+    justify-content: end;
     flex-wrap: wrap;
     gap: 10px;
   }
@@ -162,15 +163,14 @@ const stack = [
     text-transform: uppercase;
     padding: 10px 22px;
     border: 1px solid var(--border);
-    color: var(--text-muted);
+    color: var(--text-primary);
     border-radius: 6px;
     transition:
       border-color 0.2s ease,
       color 0.2s ease;
   }
 
-  .sobre-btn:hover,
-  .sobre-btn.primary {
+  .sobre-btn:hover {
     border-color: var(--accent);
     color: var(--accent);
   }
@@ -254,7 +254,7 @@ const stack = [
 
   .card-desc {
     font-size: 0.78rem;
-    color: var(--text-muted);
+    color: var(--text-primary);
     margin-top: 10px;
     line-height: 1.6;
     opacity: 0;
@@ -273,13 +273,21 @@ const stack = [
       gap: 3rem;
     }
 
+    .sobre-texto {
+      text-align: center;
+    }
+
+    .sobre-links {
+      justify-content: center;
+    }
+
     .section-label-sobre::after {
       content: "";
       flex: 1;
       height: 1px;
       background: var(--border);
     }
-    
+
     .section-label-stack::before {
       content: "";
       flex: 1;
