@@ -1,0 +1,183 @@
+---
+import { getCollection, type CollectionEntry } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import HeaderBlog from "../../components/HeaderBlog.astro";
+
+type Post = CollectionEntry<"blog">;
+
+const posts = (await getCollection("blog")).sort(
+    (a: Post, b: Post) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+
+// Agrupa por "YYYY - Mês"
+const groups: Record<string, Post[]> = {};
+for (const post of posts) {
+    const label = post.data.date.toLocaleDateString("pt-BR", {
+        year: "numeric",
+        month: "long",
+    });
+    if (!groups[label]) groups[label] = [];
+    groups[label].push(post);
+}
+---
+
+<Layout title="Blog — Ramos">
+    <HeaderBlog />
+
+    <main class="blog-main">
+        <header class="blog-hero">
+            <h1 class="blog-title">ramos<span class="accent">.blog</span></h1>
+            <p class="blog-subtitle">
+                Notas sobre C#, .NET, infraestrutura e o que eu aprendo no
+                caminho.
+            </p>
+        </header>
+
+        <div class="blog-list">
+            {
+                Object.entries(groups).map(([label, groupPosts]) => (
+                    <section class="month-group">
+                        <h2 class="month-label">{label}</h2>
+                        <ul class="post-list">
+                            {groupPosts.map((post: Post) => (
+                                <li class="post-item">
+                                    <a
+                                        href={`/portfolio/blog/${post.id}`}
+                                        class="post-link"
+                                    >
+                                        <span class="post-title">
+                                            {post.data.title}
+                                        </span>
+                                        <span class="post-tags">
+                                            {post.data.tags?.map(
+                                                (tag: string) => (
+                                                    <span class="tag">
+                                                        #{tag}
+                                                    </span>
+                                                ),
+                                            )}
+                                        </span>
+                                    </a>
+                                </li>
+                            ))}
+                        </ul>
+                    </section>
+                ))
+            }
+        </div>
+    </main>
+</Layout>
+
+<style>
+    .blog-main {
+        max-width: 720px;
+        margin: 0 auto;
+        padding: 120px 1.5rem 5rem;
+    }
+
+    .blog-hero {
+        margin-bottom: 4rem;
+        padding-bottom: 2.5rem;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .blog-title {
+        font-size: clamp(2rem, 5vw, 3rem);
+        font-weight: 700;
+        letter-spacing: -0.03em;
+        color: var(--text-primary);
+        margin-bottom: 0.75rem;
+    }
+
+    .accent {
+        color: var(--accent);
+    }
+
+    .blog-subtitle {
+        font-family: monospace;
+        font-size: 0.85rem;
+        letter-spacing: 0.04em;
+        color: var(--text-muted);
+        line-height: 1.6;
+    }
+
+    .blog-list {
+        display: flex;
+        flex-direction: column;
+        gap: 3rem;
+    }
+
+    .month-label {
+        font-family: monospace;
+        font-size: 0.72rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 1rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .post-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .post-item {
+        border-bottom: 1px solid
+            color-mix(in srgb, var(--border) 50%, transparent);
+    }
+
+    .post-item:last-child {
+        border-bottom: none;
+    }
+
+    .post-link {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 0.9rem 0;
+        color: var(--text-primary);
+        transition: color 0.15s ease;
+        flex-wrap: wrap;
+    }
+
+    .post-link:hover {
+        color: var(--accent);
+    }
+
+    .post-title {
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.4;
+        flex: 1;
+    }
+
+    .post-tags {
+        display: flex;
+        gap: 6px;
+        flex-shrink: 0;
+        flex-wrap: wrap;
+    }
+
+    .tag {
+        font-family: monospace;
+        font-size: 0.65rem;
+        letter-spacing: 0.05em;
+        color: var(--text-muted);
+    }
+
+    .post-link:hover .tag {
+        color: color-mix(in srgb, var(--accent) 70%, transparent);
+    }
+
+    @media (max-width: 600px) {
+        .post-tags {
+            display: none;
+        }
+    }
+</style>
