@@ -26,10 +26,11 @@ for (const post of posts) {
 
     <main class="blog-main">
         <header class="blog-hero">
-            <h1 class="blog-title">ramos<span class="accent">.blog</span></h1>
+            <h1 class="blog-title">Ramos<span class="accent">.blog</span></h1>
             <p class="blog-subtitle">
-                Notas sobre C#, .NET, infraestrutura e o que eu aprendo no
-                caminho.
+                Bem-vindo ao meu blog! aqui você vai encontrar anotações sobre o
+                que estudo, construo e aprendo - Programação, infraestrutura,
+                cyber e às vezes coisas aleatórias.
             </p>
         </header>
 
@@ -45,9 +46,16 @@ for (const post of posts) {
                                         href={`/portfolio/blog/${post.id}`}
                                         class="post-link"
                                     >
-                                        <span class="post-title">
-                                            {post.data.title}
-                                        </span>
+                                        <div class="post-info">
+                                            <span class="post-title">
+                                                <span class="post-id">
+                                                    #{post.data.postId} - </span>
+                                                {post.data.title}
+                                            </span>
+                                            <span class="post-desc">
+                                                {post.data.description}
+                                            </span>
+                                        </div>
                                         <span class="post-tags">
                                             {post.data.tags?.map(
                                                 (tag: string) => (
@@ -67,7 +75,6 @@ for (const post of posts) {
         </div>
     </main>
 </Layout>
-
 <style>
     .blog-main {
         max-width: 720px;
@@ -82,11 +89,13 @@ for (const post of posts) {
     }
 
     .blog-title {
-        font-size: clamp(2rem, 5vw, 3rem);
+        font-family: "Georgia", serif;
+        font-size: clamp(2.2rem, 5vw, 3.2rem);
         font-weight: 700;
         letter-spacing: -0.03em;
         color: var(--text-primary);
         margin-bottom: 0.75rem;
+        line-height: 1.1;
     }
 
     .accent {
@@ -118,7 +127,7 @@ for (const post of posts) {
         border-bottom: 1px solid var(--border);
     }
 
-    .post-list {
+    :global(.post-list) {
         list-style: none;
         padding: 0;
         margin: 0;
@@ -126,18 +135,18 @@ for (const post of posts) {
         flex-direction: column;
     }
 
-    .post-item {
+    :global(.post-item) {
         border-bottom: 1px solid
             color-mix(in srgb, var(--border) 50%, transparent);
     }
 
-    .post-item:last-child {
+    :global(.post-item:last-child) {
         border-bottom: none;
     }
 
-    .post-link {
+    :global(.post-link) {
         display: flex;
-        align-items: baseline;
+        align-items: flex-start;
         justify-content: space-between;
         gap: 1rem;
         padding: 0.9rem 0;
@@ -146,37 +155,65 @@ for (const post of posts) {
         flex-wrap: wrap;
     }
 
-    .post-link:hover {
-        color: var(--accent);
-    }
-
-    .post-title {
-        font-size: 1rem;
-        font-weight: 400;
-        line-height: 1.4;
+    :global(.post-info) {
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
         flex: 1;
     }
 
-    .post-tags {
+    :global(.post-title) {
+        font-family: "Georgia", serif;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.4;
+        color: var(--text-primary);
+        transition: color 0.15s ease;
+    }
+    :global(.post-id) {
+        font-family: "Georgia", serif;
+        opacity: 0.;
+    }
+
+    :global(.post-desc) {
+        font-family: monospace;
+        font-size: 0.75rem;
+        color: var(--text-muted);
+        line-height: 1.5;
+        font-weight: 400;
+        transition: color 0.15s ease;
+    }
+
+    :global(.post-tags) {
         display: flex;
         gap: 6px;
         flex-shrink: 0;
         flex-wrap: wrap;
+        padding-top: 2px;
     }
 
-    .tag {
+    :global(.tag) {
         font-family: monospace;
-        font-size: 0.65rem;
+        font-size: 0.7rem;
         letter-spacing: 0.05em;
         color: var(--text-muted);
+        transition: color 0.15s ease;
     }
 
-    .post-link:hover .tag {
-        color: color-mix(in srgb, var(--accent) 70%, transparent);
+    :global(.post-link:hover .post-title) {
+        color: var(--accent);
+    }
+
+    :global(.post-link:hover .post-desc) {
+        color: color-mix(in srgb, var(--text-muted) 80%, var(--accent));
+    }
+
+    :global(.post-link:hover .tag) {
+        color: color-mix(in srgb, var(--accent) 60%, transparent);
     }
 
     @media (max-width: 600px) {
-        .post-tags {
+        :global(.post-tags) {
             display: none;
         }
     }
