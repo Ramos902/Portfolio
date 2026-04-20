@@ -1,14 +1,18 @@
 ---
 import avatarImg from "../assets/ramos.png";
+
+const roles = ["Backend Developer", "C# .NET Dev", "Técnico em T.I"];
 ---
 
 <section id="hero" class="hero">
   <div class="container hero-content">
     <div class="hero-text">
-      <span class="hero-label">Backend Developer</span>
+      <span class="hero-label">
+        <span id="hero-label"></span>
+      </span>
       <h1>
         João Pedro<br />
-        <span class="highlight">Ramos</span> Moraes
+        <span class="highlight" data-text="Ramos">Ramos</span> Moraes
       </h1>
       <p class="hero-role">C# .NET Backend Developer | Técnico em T.I</p>
       <ul class="hero-stack">
@@ -24,6 +28,35 @@ import avatarImg from "../assets/ramos.png";
     </div>
   </div>
 </section>
+
+<script>
+  const el = document.getElementById("hero-label")!;
+  const roles = ["Backend Developer", "C# .NET Dev", "Técnico em T.I"];
+  let ri = 0,
+    ci = 0,
+    deleting = false;
+
+  function tick() {
+    const word = roles[ri];
+    el.textContent = deleting ? word.slice(0, ci--) : word.slice(0, ci++);
+
+    let delay = deleting ? 45 : 90;
+
+    if (!deleting && ci > word.length) {
+      delay = 1800;
+      deleting = true;
+    } else if (deleting && ci < 0) {
+      deleting = false;
+      ci = 0;
+      ri = (ri + 1) % roles.length;
+      delay = 400;
+    }
+
+    setTimeout(tick, delay);
+  }
+
+  tick();
+</script>
 
 <style>
   .hero {
@@ -41,6 +74,7 @@ import avatarImg from "../assets/ramos.png";
     align-items: center;
   }
 
+  /* ── Typewriter label ── */
   .hero-label {
     display: block;
     font-family: monospace;
@@ -49,18 +83,207 @@ import avatarImg from "../assets/ramos.png";
     text-transform: uppercase;
     color: var(--accent);
     margin-bottom: 1.25rem;
+    height: 1.4em;
+    line-height: 1.4;
+    /* sem border-right aqui */
   }
 
+  /* cursor fica no span interno, colado no texto */
+  #hero-label {
+    border-right: 2px solid var(--accent);
+    padding-right: 3px;
+    animation: blink 0.7s step-end infinite;
+  }
+
+  @keyframes blink {
+    0%,
+    100% {
+      border-color: var(--accent);
+    }
+    50% {
+      border-color: transparent;
+    }
+  }
+
+  /* ── Título ── */
   .hero h1 {
     font-size: clamp(2.4rem, 5vw, 3.8rem);
     font-weight: 700;
     line-height: 1.1;
   }
 
+  /* ── Glitch "Ramos" ── */
   .highlight {
+    position: relative;
+    display: inline-block;
     color: var(--accent);
   }
 
+  .highlight::before,
+  .highlight::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  /* camada vermelha */
+  .highlight::before {
+    color: #ff2020;
+    animation: glitch-r 2.5s infinite linear;
+  }
+
+  /* camada branca */
+  .highlight::after {
+    color: #ffffff;
+    animation: glitch-w 2.5s infinite linear;
+    opacity: 0.85;
+  }
+
+  @keyframes glitch-r {
+    0%,
+    100% {
+      clip-path: none;
+      transform: none;
+      opacity: 0;
+    }
+
+    10% {
+      opacity: 1;
+      clip-path: inset(8% 0 80% 0);
+      transform: translateX(-6px);
+    }
+    11% {
+      clip-path: inset(8% 0 80% 0);
+      transform: translateX(5px);
+    }
+    12% {
+      clip-path: inset(45% 0 40% 0);
+      transform: translateX(-4px);
+    }
+    13% {
+      clip-path: inset(45% 0 40% 0);
+      transform: translateX(6px);
+    }
+    14% {
+      clip-path: inset(70% 0 15% 0);
+      transform: translateX(-3px);
+    }
+    15% {
+      opacity: 0;
+      clip-path: none;
+      transform: none;
+    }
+
+    42% {
+      opacity: 1;
+      clip-path: inset(20% 0 65% 0);
+      transform: translateX(8px);
+    }
+    43% {
+      clip-path: inset(55% 0 30% 0);
+      transform: translateX(-7px);
+    }
+    44% {
+      clip-path: inset(80% 0 5% 0);
+      transform: translateX(5px);
+    }
+    45% {
+      opacity: 0;
+      clip-path: none;
+      transform: none;
+    }
+
+    78% {
+      opacity: 1;
+      clip-path: inset(30% 0 55% 0);
+      transform: translateX(-9px);
+    }
+    79% {
+      clip-path: inset(60% 0 25% 0);
+      transform: translateX(8px);
+    }
+    80% {
+      clip-path: inset(5% 0 88% 0);
+      transform: translateX(-4px);
+    }
+    81% {
+      clip-path: inset(50% 0 35% 0);
+      transform: translateX(6px);
+    }
+    82% {
+      opacity: 0;
+      clip-path: none;
+      transform: none;
+    }
+  }
+
+  @keyframes glitch-w {
+    0%,
+    100% {
+      clip-path: none;
+      transform: none;
+      opacity: 0;
+    }
+
+    10% {
+      opacity: 0.9;
+      clip-path: inset(25% 0 60% 0);
+      transform: translateX(5px);
+    }
+    11% {
+      clip-path: inset(60% 0 20% 0);
+      transform: translateX(-6px);
+    }
+    12% {
+      clip-path: inset(10% 0 75% 0);
+      transform: translateX(4px);
+    }
+    13% {
+      opacity: 0;
+      clip-path: none;
+      transform: none;
+    }
+
+    42% {
+      opacity: 0.9;
+      clip-path: inset(70% 0 10% 0);
+      transform: translateX(-5px);
+    }
+    43% {
+      clip-path: inset(15% 0 70% 0);
+      transform: translateX(7px);
+    }
+    44% {
+      opacity: 0;
+      clip-path: none;
+      transform: none;
+    }
+
+    78% {
+      opacity: 0.9;
+      clip-path: inset(40% 0 45% 0);
+      transform: translateX(6px);
+    }
+    79% {
+      clip-path: inset(15% 0 72% 0);
+      transform: translateX(-8px);
+    }
+    80% {
+      clip-path: inset(65% 0 20% 0);
+      transform: translateX(4px);
+    }
+    81% {
+      opacity: 0;
+      clip-path: none;
+      transform: none;
+    }
+  }
+
+  /* ── Resto (inalterado) ── */
   .hero-role {
     font-family: monospace;
     font-size: 0.85rem;
