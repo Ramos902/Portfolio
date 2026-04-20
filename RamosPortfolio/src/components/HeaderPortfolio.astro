@@ -4,18 +4,22 @@ const navLinks = [
   { label: "Sobre", href: "#sobre" },
   { label: "Stack", href: "#sobre" },
   { label: "Projetos", href: "#projetos" },
-  { label: "Blog", href: "/portfolio/blog" },
+  { label: "Blog", href: `${import.meta.env.BASE_URL}blog` },
 ];
 ---
 
 <header class="header">
   <div class="container nav">
-    <a href="/portfolio" class="logo">Ramos</a>
+    <a href={import.meta.env.BASE_URL} class="logo">Ramos</a>
 
     <nav id="nav-menu">
-      {navLinks.map((link) => (
-        <a href={link.href} class="nav-link">{link.label}</a>
-      ))}
+      {
+        navLinks.map((link) => (
+          <a href={link.href} class="nav-link">
+            {link.label}
+          </a>
+        ))
+      }
     </nav>
 
     <div class="nav-actions">
@@ -94,7 +98,9 @@ const navLinks = [
     align-items: center;
     justify-content: center;
     font-size: 1rem;
-    transition: border-color 0.2s ease, color 0.2s ease;
+    transition:
+      border-color 0.2s ease,
+      color 0.2s ease;
     flex-shrink: 0;
   }
 
@@ -118,7 +124,9 @@ const navLinks = [
     width: 22px;
     height: 1.5px;
     background: var(--text-primary);
-    transition: transform 0.3s ease, opacity 0.3s ease;
+    transition:
+      transform 0.3s ease,
+      opacity 0.3s ease;
   }
 
   .hamburger.open span:nth-child(1) {
