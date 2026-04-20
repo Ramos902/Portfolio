@@ -1,22 +1,23 @@
 ---
-const navLinks = [
-  { label: "Posts", href: "/portfolio/blog" },
-  { label: "Tags", href: "/portfolio/blog/tags" },
-];
 ---
 
 <header class="header">
   <div class="container nav">
     <div class="nav-left">
-      <a href="/portfolio/blog" class="logo">Ramos<span class="logo-dot">.blog</span></a>
-      <a href="/portfolio" class="back-link">← Portfólio</a>
+      <a href={`${import.meta.env.BASE_URL}/blog`} class="logo">Ramos<span class="logo-dot">.blog</span></a>
+      <a href={import.meta.env.BASE_URL} class="back-link">← Portfólio</a>
     </div>
 
-    <nav id="nav-menu">
-      {navLinks.map((link) => (
-        <a href={link.href} class="nav-link">{link.label}</a>
-      ))}
-    </nav>
+    <div class="search-wrap">
+      <span class="search-icon">⌕</span>
+      <input
+        type="text"
+        id="blog-search"
+        class="search-input"
+        placeholder="Buscar posts..."
+        autocomplete="off"
+      />
+    </div>
 
     <div class="nav-actions">
       <button class="theme-toggle" id="theme-toggle" aria-label="Alternar tema">
@@ -48,12 +49,14 @@ const navLinks = [
     justify-content: space-between;
     align-items: center;
     height: 70px;
+    gap: 2rem;
   }
 
   .nav-left {
     display: flex;
     align-items: center;
     gap: 1.25rem;
+    flex-shrink: 0;
   }
 
   .logo {
@@ -85,28 +88,48 @@ const navLinks = [
     border-color: var(--accent);
   }
 
-  nav {
+  .search-wrap {
+    flex: 1;
+    max-width: 360px;
+    position: relative;
     display: flex;
-    gap: 2rem;
+    align-items: center;
   }
 
-  .nav-link {
+  .search-icon {
+    position: absolute;
+    left: 10px;
+    font-size: 1rem;
+    color: var(--text-muted);
+    pointer-events: none;
+  }
+
+  .search-input {
+    width: 100%;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 7px 12px 7px 30px;
     font-family: monospace;
     font-size: 0.78rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    transition: color 0.2s ease;
+    color: var(--text-primary);
+    outline: none;
+    transition: border-color 0.2s ease;
   }
 
-  .nav-link:hover {
-    color: var(--accent);
+  .search-input::placeholder {
+    color: var(--text-muted);
+  }
+
+  .search-input:focus {
+    border-color: var(--accent);
   }
 
   .nav-actions {
     display: flex;
     align-items: center;
     gap: 10px;
+    flex-shrink: 0;
   }
 
   .theme-toggle {
@@ -165,26 +188,8 @@ const navLinks = [
       display: flex;
     }
 
-    nav {
-      display: none;
-      position: absolute;
-      top: 70px;
-      left: 0;
-      width: 100%;
-      flex-direction: column;
-      gap: 0;
-      background: var(--bg-primary);
-      border-bottom: 1px solid var(--border);
-    }
-
-    nav.open {
-      display: flex;
-    }
-
-    .nav-link {
-      padding: 1rem 2rem;
-      border-top: 1px solid var(--border);
-      width: 100%;
+    .search-wrap {
+      max-width: 140px;
     }
 
     .back-link {
@@ -197,34 +202,20 @@ const navLinks = [
   const toggle = document.getElementById("theme-toggle");
   const root = document.documentElement;
   const hamburger = document.getElementById("hamburger");
-  const navMenu = document.getElementById("nav-menu");
 
   const saved = localStorage.getItem("theme");
   const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
   const isDark = saved ? saved === "dark" : prefersDark;
 
-  if (isDark) {
-    root.setAttribute("data-theme", "dark");
-  } else {
-    root.setAttribute("data-theme", "light");
-  }
+  root.setAttribute("data-theme", isDark ? "dark" : "light");
 
   toggle?.addEventListener("click", () => {
-    const current = root.getAttribute("data-theme");
-    const next = current === "dark" ? "light" : "dark";
+    const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
     root.setAttribute("data-theme", next);
     localStorage.setItem("theme", next);
   });
 
   hamburger?.addEventListener("click", () => {
     hamburger.classList.toggle("open");
-    navMenu?.classList.toggle("open");
-  });
-
-  document.querySelectorAll(".nav-link").forEach((link) => {
-    link.addEventListener("click", () => {
-      hamburger?.classList.remove("open");
-      navMenu?.classList.remove("open");
-    });
   });
 </script>

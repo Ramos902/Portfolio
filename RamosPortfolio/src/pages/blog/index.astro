@@ -9,7 +9,6 @@ const posts = (await getCollection("blog")).sort(
     (a: Post, b: Post) => b.data.date.valueOf() - a.data.date.valueOf(),
 );
 
-// Agrupa por "YYYY - Mês"
 const groups: Record<string, Post[]> = {};
 for (const post of posts) {
     const label = post.data.date.toLocaleDateString("pt-BR", {
@@ -34,22 +33,27 @@ for (const post of posts) {
             </p>
         </header>
 
-        <div class="blog-list">
+        <div class="blog-list" id="blog-list">
             {
                 Object.entries(groups).map(([label, groupPosts]) => (
                     <section class="month-group">
                         <h2 class="month-label">{label}</h2>
                         <ul class="post-list">
                             {groupPosts.map((post: Post) => (
-                                <li class="post-item">
+                                <li
+                                    class="post-item"
+                                    data-title={post.data.title.toLowerCase()}
+                                    data-body={post.body?.toLowerCase() ?? ""}
+                                >
                                     <a
-                                        href={`/portfolio/blog/${post.id}`}
+                                        href={`${import.meta.env.BASE_URL}blog/${post.id}`}
                                         class="post-link"
                                     >
                                         <div class="post-info">
                                             <span class="post-title">
                                                 <span class="post-id">
-                                                    #{post.data.postId} - </span>
+                                                    #{post.data.postId} -{" "}
+                                                </span>
                                                 {post.data.title}
                                             </span>
                                             <span class="post-desc">
@@ -73,8 +77,43 @@ for (const post of posts) {
                 ))
             }
         </div>
+
+        <p class="no-results" id="no-results" style="display:none">
+            Nenhum post encontrado.
+        </p>
     </main>
 </Layout>
+
+<script>
+    const input = document.getElementById("blog-search") as HTMLInputElement;
+    const noResults = document.getElementById("no-results") as HTMLElement;
+
+    input?.addEventListener("input", () => {
+        const query = input.value.toLowerCase().trim();
+        const items = document.querySelectorAll<HTMLElement>(".post-item");
+        const groups = document.querySelectorAll<HTMLElement>(".month-group");
+
+        items.forEach((item) => {
+            const title = item.dataset.title ?? "";
+            const body = item.dataset.body ?? "";
+            item.style.display =
+                !query || title.includes(query) || body.includes(query)
+                    ? ""
+                    : "none";
+        });
+
+        groups.forEach((group) => {
+            const hasVisible = [
+                ...group.querySelectorAll<HTMLElement>(".post-item"),
+            ].some((i) => i.style.display !== "none");
+            group.style.display = hasVisible ? "" : "none";
+        });
+
+        const anyVisible = [...items].some((i) => i.style.display !== "none");
+        noResults.style.display = anyVisible ? "none" : "block";
+    });
+</script>
+
 <style>
     .blog-main {
         max-width: 720px;
@@ -127,6 +166,14 @@ for (const post of posts) {
         border-bottom: 1px solid var(--border);
     }
 
+    .no-results {
+        font-family: monospace;
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        text-align: center;
+        padding: 3rem 0;
+    }
+
     :global(.post-list) {
         list-style: none;
         padding: 0;
@@ -170,9 +217,9 @@ for (const post of posts) {
         color: var(--text-primary);
         transition: color 0.15s ease;
     }
+
     :global(.post-id) {
         font-family: "Georgia", serif;
-        opacity: 0.;
     }
 
     :global(.post-desc) {
