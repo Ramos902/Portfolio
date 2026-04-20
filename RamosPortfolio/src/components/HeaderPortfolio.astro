@@ -1,135 +1,199 @@
 ---
 const navLinks = [
-    { label: "Inicio", href: "#hero" },
-    { label: "Sobre", href: "#sobre" },
-    { label: "Stack", href: "#sobre" },
-    { label: "Projetos", href: "#projetos" },
-    { label: "Blog", href: "/blog" },
+  { label: "Inicio", href: "#hero" },
+  { label: "Sobre", href: "#sobre" },
+  { label: "Stack", href: "#sobre" },
+  { label: "Projetos", href: "#projetos" },
+  { label: "Blog", href: "/blog" },
 ];
 ---
 
 <header class="header">
-    <div class="container nav">
-        <a href="/portfolio" class="logo">Ramos</a>
-        <nav>
-            {
-                navLinks.map((link) => (
-                    <a href={link.href} class="nav-link">
-                        {link.label}
-                    </a>
-                ))
-            }
-        </nav>
-        <button
-            class="theme-toggle"
-            id="theme-toggle"
-            aria-label="Alternar tema"
-        >
-            <span class="theme-icon" id="theme-icon">◐</span>
-        </button>
+  <div class="container nav">
+    <a href="/portfolio" class="logo">Ramos</a>
+
+    <nav id="nav-menu">
+      {navLinks.map((link) => (
+        <a href={link.href} class="nav-link">{link.label}</a>
+      ))}
+    </nav>
+
+    <div class="nav-actions">
+      <button class="theme-toggle" id="theme-toggle" aria-label="Alternar tema">
+        <span class="theme-icon" id="theme-icon">◐</span>
+      </button>
+      <button class="hamburger" id="hamburger" aria-label="Abrir menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
     </div>
+  </div>
 </header>
 
 <style>
-    .header {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        z-index: 100;
-        background: color-mix(in srgb, var(--bg-primary) 85%, transparent);
-        backdrop-filter: blur(8px);
-        border-bottom: 1px solid var(--border);
-    }
+  .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    background: color-mix(in srgb, var(--bg-primary) 85%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+  }
 
-    .nav {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        height: 70px;
-    }
+  .nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+  }
 
-    .logo {
-        font-family: "Georgia", serif;
-        font-size: 1.1rem;
-        font-weight: 700;
-        color: var(--text-primary);
-        letter-spacing: -0.02em;
+  .logo {
+    font-family: "Georgia", serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
+  }
+
+  nav {
+    display: flex;
+    gap: 2rem;
+  }
+
+  .nav-link {
+    font-family: monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    transition: color 0.2s ease;
+  }
+
+  .nav-link:hover {
+    color: var(--accent);
+  }
+
+  .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .theme-toggle {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    width: 34px;
+    height: 34px;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    transition: border-color 0.2s ease, color 0.2s ease;
+    flex-shrink: 0;
+  }
+
+  .theme-toggle:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+  }
+
+  .hamburger span {
+    display: block;
+    width: 22px;
+    height: 1.5px;
+    background: var(--text-primary);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+
+  .hamburger.open span:nth-child(1) {
+    transform: translateY(6.5px) rotate(45deg);
+  }
+
+  .hamburger.open span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .hamburger.open span:nth-child(3) {
+    transform: translateY(-6.5px) rotate(-45deg);
+  }
+
+  @media (max-width: 768px) {
+    .hamburger {
+      display: flex;
     }
 
     nav {
-        display: flex;
-        gap: 2rem;
+      display: none;
+      position: absolute;
+      top: 70px;
+      left: 0;
+      width: 100%;
+      flex-direction: column;
+      gap: 0;
+      background: var(--bg-primary);
+      border-bottom: 1px solid var(--border);
+    }
+
+    nav.open {
+      display: flex;
     }
 
     .nav-link {
-        font-family: monospace;
-        font-size: 0.78rem;
-        letter-spacing: 0.06em;
-        text-transform: uppercase;
-        color: var(--text-muted);
-        transition: color 0.2s ease;
+      padding: 1rem 2rem;
+      border-top: 1px solid var(--border);
+      width: 100%;
     }
-
-    .nav-link:hover {
-        color: var(--accent);
-    }
-
-    .theme-toggle {
-        background: transparent;
-        border: 1px solid var(--border);
-        color: var(--text-muted);
-        width: 34px;
-        height: 34px;
-        border-radius: 6px;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1rem;
-        transition:
-            border-color 0.2s ease,
-            color 0.2s ease;
-        flex-shrink: 0;
-    }
-
-    .theme-toggle:hover {
-        border-color: var(--accent);
-        color: var(--accent);
-    }
-
-    @media (max-width: 768px) {
-        nav {
-            gap: 1.2rem;
-        }
-
-        .nav-link {
-            font-size: 0.7rem;
-        }
-    }
+  }
 </style>
 
 <script>
-    const toggle = document.getElementById("theme-toggle");
-    const icon = document.getElementById("theme-icon");
-    const root = document.documentElement;
+  const toggle = document.getElementById("theme-toggle");
+  const root = document.documentElement;
+  const hamburger = document.getElementById("hamburger");
+  const navMenu = document.getElementById("nav-menu");
 
-    const saved = localStorage.getItem("theme");
-    const prefersDark = window.matchMedia(
-        "(prefers-color-scheme: dark)",
-    ).matches;
-    const isDark = saved ? saved === "dark" : prefersDark;
+  const saved = localStorage.getItem("theme");
+  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  const isDark = saved ? saved === "dark" : prefersDark;
 
-    if (isDark) {
-        root.setAttribute("data-theme", "dark");
-    } else {
-        root.setAttribute("data-theme", "light");
-    }
+  if (isDark) {
+    root.setAttribute("data-theme", "dark");
+  } else {
+    root.setAttribute("data-theme", "light");
+  }
 
-    toggle?.addEventListener("click", () => {
-        const current = root.getAttribute("data-theme");
-        const next = current === "dark" ? "light" : "dark";
-        root.setAttribute("data-theme", next);
-        localStorage.setItem("theme", next);
+  toggle?.addEventListener("click", () => {
+    const current = root.getAttribute("data-theme");
+    const next = current === "dark" ? "light" : "dark";
+    root.setAttribute("data-theme", next);
+    localStorage.setItem("theme", next);
+  });
+
+  hamburger?.addEventListener("click", () => {
+    hamburger.classList.toggle("open");
+    navMenu?.classList.toggle("open");
+  });
+
+  document.querySelectorAll(".nav-link").forEach((link) => {
+    link.addEventListener("click", () => {
+      hamburger?.classList.remove("open");
+      navMenu?.classList.remove("open");
     });
+  });
 </script>
