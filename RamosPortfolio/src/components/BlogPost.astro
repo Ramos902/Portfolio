@@ -12,12 +12,24 @@ const { title, date, description, tags } = Astro.props;
 <article class="post-wrapper">
   <header class="post-header">
     <div class="post-meta">
-      <time>{date.toLocaleDateString("pt-BR", { day: "2-digit", month: "long", year: "numeric" })}</time>
-      {tags && tags.length > 0 && (
-        <ul class="post-tags">
-          {tags.map((tag) => <li>#{tag}</li>)}
-        </ul>
-      )}
+      <time
+        >{
+          date.toLocaleDateString("pt-BR", {
+            day: "2-digit",
+            month: "long",
+            year: "numeric",
+          })
+        }</time
+      >
+      {
+        tags && tags.length > 0 && (
+          <ul class="post-tags">
+            {tags.map((tag) => (
+              <li>#{tag}</li>
+            ))}
+          </ul>
+        )
+      }
     </div>
 
     <h1 class="post-title">{title}</h1>
@@ -37,6 +49,7 @@ const { title, date, description, tags } = Astro.props;
 </article>
 
 <style>
+
   .post-wrapper {
     max-width: 680px;
     margin: 0 auto;
@@ -84,6 +97,7 @@ const { title, date, description, tags } = Astro.props;
   }
 
   .post-title {
+    font-family: "Georgia", serif;
     font-size: clamp(1.8rem, 4vw, 2.8rem);
     font-weight: 700;
     line-height: 1.15;
@@ -105,36 +119,69 @@ const { title, date, description, tags } = Astro.props;
     margin-top: 2rem;
   }
 
-  /* ── Conteúdo Markdown ── */
   .post-content {
-    color: var(--text-primary);
     line-height: 1.8;
     font-size: 1rem;
   }
 
+  .post-content :global(h2),
+  .post-content :global(h3),
+  .post-content :global(h4) {
+    font-family: "Georgia", serif;
+    color: var(--text-primary);
+    font-weight: 700;
+  }
+
   .post-content :global(h2) {
     font-size: 1.4rem;
-    font-weight: 700;
     margin: 2.5rem 0 1rem;
-    color: var(--text-primary);
   }
 
   .post-content :global(h3) {
     font-size: 1.15rem;
-    font-weight: 700;
     margin: 2rem 0 0.75rem;
-    color: var(--text-primary);
+  }
+
+  .post-content :global(h4) {
+    font-size: 1rem;
+    margin: 1.5rem 0 0.5rem;
   }
 
   .post-content :global(p) {
     margin-bottom: 1.25rem;
-    color: var(--text-secondary, var(--text-muted));
+    color: var(--text-muted);
+  }
+
+  .post-content :global(strong) {
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+
+  .post-content :global(em) {
+    font-style: italic;
   }
 
   .post-content :global(a) {
     color: var(--accent);
     text-decoration: underline;
     text-underline-offset: 3px;
+  }
+
+  .post-content :global(ul) {
+    list-style: disc;
+    padding-left: 1.5rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .post-content :global(ol) {
+    list-style: decimal;
+    padding-left: 1.5rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .post-content :global(li) {
+    margin-bottom: 0.4rem;
+    color: var(--text-muted);
   }
 
   .post-content :global(code) {
@@ -148,7 +195,7 @@ const { title, date, description, tags } = Astro.props;
   }
 
   .post-content :global(pre) {
-    background: var(--bg-secondary, #111);
+    background: var(--bg-secondary);
     border: 1px solid var(--border);
     border-radius: 8px;
     padding: 1.25rem;
@@ -172,17 +219,6 @@ const { title, date, description, tags } = Astro.props;
     font-style: italic;
   }
 
-  .post-content :global(ul),
-  .post-content :global(ol) {
-    padding-left: 1.5rem;
-    margin-bottom: 1.25rem;
-  }
-
-  .post-content :global(li) {
-    margin-bottom: 0.4rem;
-    color: var(--text-secondary, var(--text-muted));
-  }
-
   .post-content :global(hr) {
     border: none;
     border-top: 1px solid var(--border);
@@ -196,7 +232,30 @@ const { title, date, description, tags } = Astro.props;
     border: 1px solid var(--border);
   }
 
-  /* ── Footer ── */
+  .post-content :global(table) {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    font-size: 0.9rem;
+  }
+
+  .post-content :global(th) {
+    font-family: monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent);
+    border-bottom: 1px solid var(--border);
+    padding: 8px 12px;
+    text-align: left;
+  }
+
+  .post-content :global(td) {
+    padding: 8px 12px;
+    border-bottom: 1px solid color-mix(in srgb, var(--border) 50%, transparent);
+    color: var(--text-muted);
+  }
+
   .post-footer {
     margin-top: 4rem;
     padding-top: 2rem;
@@ -212,11 +271,19 @@ const { title, date, description, tags } = Astro.props;
     border: 1px solid var(--border);
     padding: 6px 14px;
     border-radius: 4px;
-    transition: color 0.2s ease, border-color 0.2s ease;
+    transition:
+      color 0.2s ease,
+      border-color 0.2s ease;
   }
 
   .back-link:hover {
     color: var(--accent);
     border-color: var(--accent);
+  }
+
+  @media (max-width: 600px) {
+    .post-wrapper {
+      padding-top: 160px;
+    }
   }
 </style>

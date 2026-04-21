@@ -6,7 +6,8 @@ date: 2025-04-20
 tags: ["MySQL", "SQL", "Performance"]
 ---
 
-# Task 5 (IFSP) - Store Procedure
+# Task 5 (IFSP) - Store Procedure 
+<br/>
 
 Para entender melhor como utilizar *stored procedures* de forma descomplicada, é necessário compreender o que são, quando utilizá-las e se há ganho de performance no banco de dados.
 
@@ -114,8 +115,8 @@ BEGIN
         RETURN;
     END
 
-    -- Atualização: caso o código passe pelas tratativas anteriores a atualização 
-    -- é realizada.
+    -- Atualização: caso o código passe pelas tratativas anteriores a
+    -- atualização é realizada.
     UPDATE Usuarios
     SET Email = @NovoEmail
     WHERE Id = @UsuarioId;
