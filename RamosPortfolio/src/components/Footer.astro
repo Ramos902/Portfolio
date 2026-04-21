@@ -1,0 +1,69 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="container footer-inner">
+    <span class="footer-name">João Pedro Ramos Moraes</span>
+    <span class="footer-copy">© {year} — Feito com Astro</span>
+    <div class="footer-links">
+      <a href="https://github.com/Ramos902" target="_blank" rel="noopener noreferrer" class="footer-link">GitHub</a>
+      <a href="https://linkedin.com/in/joaoramos1512" target="_blank" rel="noopener noreferrer" class="footer-link">LinkedIn</a>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    border-top: 1px solid var(--border);
+    padding: 2rem 0;
+  }
+
+  .footer-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .footer-name {
+    font-family: "Georgia", serif;
+    font-size: 0.85rem;
+    color: var(--text-primary);
+  }
+
+  .footer-copy {
+    font-family: monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  .footer-link {
+    font-family: monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    transition: color 0.2s ease;
+  }
+
+  .footer-link:hover {
+    color: var(--accent);
+  }
+
+  @media (max-width: 600px) {
+    .footer-inner {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 0.75rem;
+    }
+  }
+</style>
