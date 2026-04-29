@@ -15,7 +15,7 @@ Se você trabalha em suporte técnico em ambientes corporativos ou hospitalares,
 ## 1. Verificar as configurações TCP/IP da impressora
  
 O primeiro passo é garantir que a impressora está com as configurações de rede corretas. Em ambientes corporativos, impressoras geralmente usam **IP estático** conectadas a uma VLAN direcionado as impressoras. Confirme os seguintes campos no painel da impressora:
- 
+ c
 | Campo              | Exemplo / Observação                                              |
 |--------------------|-------------------------------------------------------------------|
 | Método de Boot     | **Estático**                                                      |
