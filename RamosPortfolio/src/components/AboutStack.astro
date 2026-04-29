@@ -8,36 +8,30 @@ const navLinks = [
     external: true,
   },
   { label: "GitHub", href: "https://github.com/Ramos902", external: true },
-  { label: "Download CV", href: pdfLink, download: true },
 ];
 
-const stack = [
-  {
-    name: "C# .NET",
-    pct: 85,
-    desc: "APIs REST, Entity Framework e arquitetura em camadas.",
-  },
-  {
-    name: "Angular",
-    pct: 75,
-    desc: "Componentes, serviços e integração com APIs backend.",
-  },
-  {
-    name: "PostgreSQL",
-    pct: 80,
-    desc: "Modelagem relacional, queries e otimização.",
-  },
-  { name: "Docker", pct: 70, desc: "Containerização e docker-compose." },
-  {
-    name: "HTML + CSS + JS",
-    pct: 90,
-    desc: "Layouts responsivos, Grid, Flexbox e DOM.",
-  },
-  {
-    name: "Git",
-    pct: 88,
-    desc: "Versionamento, branching e fluxo colaborativo.",
-  },
+const backend = [
+  { name: "C# .NET", sub: "APIs REST & arquitetura" },
+  { name: "PostgreSQL", sub: "banco relacional" },
+  { name: "MySQL", sub: "stored procedures" },
+  { name: "Entity Framework", sub: "ORM" },
+  { name: "REST APIs", sub: "design & integração" },
+];
+
+const frontend = [
+  { name: "Angular", sub: "componentes & serviços" },
+  { name: "Astro", sub: "SSG & content collections" },
+  { name: "HTML + CSS", sub: "layouts responsivos" },
+  { name: "JavaScript", sub: "DOM & interatividade" },
+  { name: "TypeScript", sub: "tipagem estática" },
+];
+
+const devops = [
+  { name: "Docker", sub: "containerização" },
+  { name: "Git", sub: "versionamento" },
+  { name: "PowerShell", sub: "automação Windows" },
+  { name: "GitHub Actions", sub: "CI/CD" },
+  { name: "Linux", sub: "administração" },
 ];
 ---
 
@@ -50,7 +44,7 @@ const stack = [
           Desenvolvedor em formação com foco em backend utilizando .NET (C#),
           com experiência na construção de APIs, manipulação de banco de dados
           SQL e integração com interfaces web. Possuo conhecimentos em frontend
-          com framworks Astro e Angular, buscando evoluir para construção de
+          com frameworks Astro e Angular, buscando evoluir para construção de
           sistemas completos e escaláveis. Atualmente desenvolvendo projetos
           próprios.
         </p>
@@ -59,10 +53,9 @@ const stack = [
             navLinks.map((item) => (
               <a
                 href={item.href}
-                class={`sobre-btn${item.label === "LinkedIn" ? " primary" : ""}`}
+                class={`sobre-btn`}
                 target={item.external ? "_blank" : undefined}
                 rel={item.external ? "noopener noreferrer" : undefined}
-                download={item.download ? true : undefined}
               >
                 {item.label}
               </a>
@@ -75,21 +68,48 @@ const stack = [
 
       <div class="bloco-stack">
         <span class="section-label-stack">Stack</span>
-        <div class="stack-grid">
-          {
-            stack.map((item) => (
-              <div class="stack-card" style={`--pct: ${item.pct}%`}>
-                <div class="card-top">
-                  <span class="card-name">{item.name}</span>
-                  <span class="card-pct">{item.pct}%</span>
-                </div>
-                <div class="card-track">
-                  <div class="card-bar" />
-                </div>
-                <p class="card-desc">{item.desc}</p>
-              </div>
-            ))
-          }
+        <div class="stack-cols">
+          <div class="stack-col">
+            <p class="col-title red">Backend</p>
+            <div class="col-track down">
+              {
+                [...backend, ...backend].map((item) => (
+                  <div class="chip red">
+                    <span class="chip-name">{item.name}</span>
+                    <span class="chip-sub">{item.sub}</span>
+                  </div>
+                ))
+              }
+            </div>
+          </div>
+
+          <div class="stack-col">
+            <p class="col-title blue">Frontend</p>
+            <div class="col-track up">
+              {
+                [...frontend, ...frontend].map((item) => (
+                  <div class="chip blue">
+                    <span class="chip-name">{item.name}</span>
+                    <span class="chip-sub">{item.sub}</span>
+                  </div>
+                ))
+              }
+            </div>
+          </div>
+
+          <div class="stack-col">
+            <p class="col-title green">DevOps</p>
+            <div class="col-track down2">
+              {
+                [...devops, ...devops].map((item) => (
+                  <div class="chip green">
+                    <span class="chip-name">{item.name}</span>
+                    <span class="chip-sub">{item.sub}</span>
+                  </div>
+                ))
+              }
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -114,6 +134,7 @@ const stack = [
     display: grid;
     grid-template-columns: 1fr auto 1fr;
     gap: 4rem;
+    align-items: center;
   }
 
   .section-label-sobre,
@@ -165,7 +186,6 @@ const stack = [
     text-transform: uppercase;
     padding: 10px 22px;
     border: 1px solid var(--border);
-
     color: var(--text-primary);
     border-radius: 6px;
     transition:
@@ -173,7 +193,7 @@ const stack = [
       color 0.2s ease;
   }
 
-  .sobre-btn:hover {
+  .sobre-btn:hover{
     border-color: var(--accent);
     color: var(--accent);
   }
@@ -185,92 +205,149 @@ const stack = [
     align-self: center;
   }
 
-  .stack-grid {
+  /* Stack colunas animadas */
+  .stack-cols {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    height: 340px;
   }
 
-  .stack-card {
-    background: var(--bg-secondary);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 18px;
-    cursor: default;
-    transition: border-color 0.2s ease;
-    height: 80px;
-    overflow: hidden;
-    transition:
-      height 0.3s ease,
-      border-color 0.2s ease;
-  }
-
-  .stack-card:hover {
-    border-color: var(--accent);
-    height: 130px;
-  }
-
-  .card-top {
+  .stack-col {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 14px;
-  }
-
-  .card-name {
-    font-family: monospace;
-    font-size: 0.85rem;
-    color: var(--text-primary);
-    letter-spacing: 0.03em;
-  }
-
-  .card-pct {
-    font-family: monospace;
-    font-size: 0.75rem;
-    opacity: 0;
-    transition: opacity 0.2s ease;
-    color: var(--text-primary);
-  }
-
-  .stack-card:hover .card-pct {
-    opacity: 1;
-  }
-
-  .card-track {
-    height: 2px;
-    background: var(--border);
-    border-radius: 2px;
+    flex-direction: column;
     overflow: hidden;
+    position: relative;
   }
 
-  .card-bar {
-    height: 100%;
-    width: 0%;
-    background: var(--accent);
-    border-radius: 2px;
-    transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  .stack-col::before,
+  .stack-col::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    z-index: 2;
+    pointer-events: none;
   }
 
-  .stack-card:hover .card-bar {
-    width: var(--pct);
+  .stack-col::before {
+    top: 0;
+    background: linear-gradient(to bottom, var(--bg-primary) 30%, transparent);
   }
 
-  .card-desc {
-    font-size: 0.78rem;
+  .stack-col::after {
+    bottom: 0;
+    background: linear-gradient(to top, var(--bg-primary) 30%, transparent);
+  }
+
+  .col-title {
+    font-family: monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 0.5rem;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 4;
+    background: var(--bg-primary);
+    padding-bottom: 6px;
+  }
+
+  .col-title.red {
+    color: var(--accent);
+  }
+  .col-title.blue {
+    color: #3b82f6;
+  }
+  .col-title.green {
+    color: #22c55e;
+  }
+
+  .col-track {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+  }
+
+  .col-track.down {
+    animation: scrollUp 18s linear infinite;
+  }
+  .col-track.up {
+    animation: scrollDown 18s linear infinite;
+  }
+  .col-track.down2 {
+    animation: scrollUp 18s linear infinite;
+  }
+  
+
+  .chip {
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--bg-secondary);
+    cursor: default;
+    flex-shrink: 0;
+    transition: border-color 0.2s ease;
+  }
+
+  .chip.red:hover {
+    border-color: var(--accent);
+  }
+  .chip.blue:hover {
+    border-color: #3b82f6;
+  }
+  .chip.green:hover {
+    border-color: #22c55e;
+  }
+
+  .chip-name {
+    font-family: monospace;
+    font-size: 0.72rem;
     color: var(--text-primary);
-    margin-top: 10px;
-    line-height: 1.6;
-    opacity: 0;
-    transition:
-      max-height 0.3s ease,
-      opacity 0.3s ease;
+    display: block;
+    transition: color 0.2s ease;
   }
 
-  .stack-card:hover .card-desc {
-    opacity: 1;
+  .chip.red:hover .chip-name {
+    color: var(--accent);
+  }
+  .chip.blue:hover .chip-name {
+    color: #3b82f6;
+  }
+  .chip.green:hover .chip-name {
+    color: #22c55e;
   }
 
-  @media (max-width: 768px) {
+  .chip-sub {
+    font-family: monospace;
+    font-size: 0.62rem;
+    color: var(--text-muted);
+    display: block;
+    margin-top: 2px;
+  }
+
+  @keyframes scrollDown {
+    0% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(-50%);
+    }
+  }
+
+  @keyframes scrollUp {
+    0% {
+      transform: translateY(-50%);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+
+  @media (max-width: 900px) {
     .sobre-grid {
       grid-template-columns: 1fr;
       gap: 3rem;
@@ -302,8 +379,8 @@ const stack = [
       display: none;
     }
 
-    .stack-grid {
-      grid-template-columns: repeat(2, 1fr);
+    .stack-cols {
+      height: 300px;
     }
   }
 </style>
