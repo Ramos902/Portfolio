@@ -6,8 +6,14 @@ const navLinks = [
     label: "LinkedIn",
     href: "https://www.linkedin.com/in/joaoramos1512/",
     external: true,
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>`,
   },
-  { label: "GitHub", href: "https://github.com/Ramos902", external: true },
+  {
+    label: "GitHub",
+    href: "https://github.com/Ramos902",
+    external: true,
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>`,
+  },
 ];
 
 const backend = [
@@ -53,10 +59,11 @@ const devops = [
             navLinks.map((item) => (
               <a
                 href={item.href}
-                class={`sobre-btn`}
+                class="sobre-btn"
                 target={item.external ? "_blank" : undefined}
                 rel={item.external ? "noopener noreferrer" : undefined}
               >
+                <Fragment set:html={item.icon} />
                 {item.label}
               </a>
             ))
@@ -71,43 +78,49 @@ const devops = [
         <div class="stack-cols">
           <div class="stack-col">
             <p class="col-title red">Backend</p>
-            <div class="col-track down">
-              {
-                [...backend, ...backend].map((item) => (
-                  <div class="chip red">
-                    <span class="chip-name">{item.name}</span>
-                    <span class="chip-sub">{item.sub}</span>
-                  </div>
-                ))
-              }
+            <div class="col-overflow">
+              <div class="col-track down">
+                {
+                  [...backend, ...backend].map((item) => (
+                    <div class="chip red">
+                      <span class="chip-name">{item.name}</span>
+                      <span class="chip-sub">{item.sub}</span>
+                    </div>
+                  ))
+                }
+              </div>
             </div>
           </div>
 
           <div class="stack-col">
             <p class="col-title blue">Frontend</p>
-            <div class="col-track up">
-              {
-                [...frontend, ...frontend].map((item) => (
-                  <div class="chip blue">
-                    <span class="chip-name">{item.name}</span>
-                    <span class="chip-sub">{item.sub}</span>
-                  </div>
-                ))
-              }
+            <div class="col-overflow">
+              <div class="col-track up">
+                {
+                  [...frontend, ...frontend].map((item) => (
+                    <div class="chip blue">
+                      <span class="chip-name">{item.name}</span>
+                      <span class="chip-sub">{item.sub}</span>
+                    </div>
+                  ))
+                }
+              </div>
             </div>
           </div>
 
           <div class="stack-col">
             <p class="col-title green">DevOps</p>
-            <div class="col-track down2">
-              {
-                [...devops, ...devops].map((item) => (
-                  <div class="chip green">
-                    <span class="chip-name">{item.name}</span>
-                    <span class="chip-sub">{item.sub}</span>
-                  </div>
-                ))
-              }
+            <div class="col-overflow">
+              <div class="col-track down2">
+                {
+                  [...devops, ...devops].map((item) => (
+                    <div class="chip green">
+                      <span class="chip-name">{item.name}</span>
+                      <span class="chip-sub">{item.sub}</span>
+                    </div>
+                  ))
+                }
+              </div>
             </div>
           </div>
         </div>
@@ -115,7 +128,6 @@ const devops = [
     </div>
   </div>
 </section>
-
 <style>
   .sobre {
     min-height: 100dvh;
@@ -134,9 +146,10 @@ const devops = [
     display: grid;
     grid-template-columns: 1fr auto 1fr;
     gap: 4rem;
-    align-items: center;
+    align-items: start;
   }
 
+  /* Labels */
   .section-label-sobre,
   .section-label-stack {
     display: flex;
@@ -150,6 +163,7 @@ const devops = [
     margin-bottom: 2rem;
   }
 
+  .section-label-sobre::after,
   .section-label-stack::after {
     content: "";
     flex: 1;
@@ -157,29 +171,25 @@ const devops = [
     background: var(--border);
   }
 
-  .section-label-sobre::before {
-    content: "";
-    flex: 1;
-    height: 1px;
-    background: var(--border);
-  }
-
+  /* Bloco Sobre */
   .sobre-texto {
     color: var(--text-primary);
     font-size: 1.05rem;
     line-height: 1.9;
     margin-bottom: 2.5rem;
-    text-align: end;
+    text-align: justify;
   }
 
   .sobre-links {
     display: flex;
-    justify-content: end;
     flex-wrap: wrap;
     gap: 10px;
   }
 
   .sobre-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
     font-family: monospace;
     font-size: 0.75rem;
     letter-spacing: 0.06em;
@@ -193,66 +203,39 @@ const devops = [
       color 0.2s ease;
   }
 
-  .sobre-btn:hover{
+  .sobre-btn:hover {
     border-color: var(--accent);
     color: var(--accent);
   }
 
+  /* Divisor */
   .divider-vertical {
     width: 1px;
-    height: 60%;
     background: var(--border);
-    align-self: center;
+    align-self: stretch;
   }
 
-  /* Stack colunas animadas */
+  /* Stack colunas */
   .stack-cols {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 12px;
-    height: 340px;
   }
 
   .stack-col {
     display: flex;
     flex-direction: column;
-    overflow: hidden;
-    position: relative;
-  }
-
-  .stack-col::before,
-  .stack-col::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    width: 100%;
-    height: 50px;
-    z-index: 2;
-    pointer-events: none;
-  }
-
-  .stack-col::before {
-    top: 0;
-    background: linear-gradient(to bottom, var(--bg-primary) 30%, transparent);
-  }
-
-  .stack-col::after {
-    bottom: 0;
-    background: linear-gradient(to top, var(--bg-primary) 30%, transparent);
   }
 
   .col-title {
     font-family: monospace;
-    font-size: 0.65rem;
+    font-size: 0.72rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     text-align: center;
-    margin-bottom: 0.5rem;
+    padding: 8px 0;
     flex-shrink: 0;
-    position: relative;
-    z-index: 4;
     background: var(--bg-primary);
-    padding-bottom: 6px;
   }
 
   .col-title.red {
@@ -265,26 +248,55 @@ const devops = [
     color: #22c55e;
   }
 
+  .col-overflow {
+    height: 300px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .col-overflow::before,
+  .col-overflow::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .col-overflow::before {
+    top: 0;
+    background: linear-gradient(to bottom, var(--bg-primary), transparent);
+  }
+
+  .col-overflow::after {
+    bottom: 0;
+    background: linear-gradient(to top, var(--bg-primary), transparent);
+  }
+
   .col-track {
     display: flex;
     flex-direction: column;
     gap: 8px;
-    flex: 1;
   }
 
   .col-track.down {
-    animation: scrollUp 18s linear infinite;
-  }
-  .col-track.up {
     animation: scrollDown 18s linear infinite;
   }
-  .col-track.down2 {
+  .col-track.up {
     animation: scrollUp 18s linear infinite;
   }
-  
+  .col-track.down2 {
+    animation: scrollDown 22s linear infinite;
+  }
+  .col-track:hover {
+    animation-play-state: paused;
+  }
 
+  /* Chips */
   .chip {
-    padding: 10px 12px;
+    padding: 12px 14px;
     border-radius: 8px;
     border: 1px solid var(--border);
     background: var(--bg-secondary);
@@ -305,7 +317,7 @@ const devops = [
 
   .chip-name {
     font-family: monospace;
-    font-size: 0.72rem;
+    font-size: 0.82rem;
     color: var(--text-primary);
     display: block;
     transition: color 0.2s ease;
@@ -323,12 +335,13 @@ const devops = [
 
   .chip-sub {
     font-family: monospace;
-    font-size: 0.62rem;
+    font-size: 0.7rem;
     color: var(--text-muted);
     display: block;
-    margin-top: 2px;
+    margin-top: 3px;
   }
 
+  /* Animações */
   @keyframes scrollDown {
     0% {
       transform: translateY(0);
@@ -347,10 +360,15 @@ const devops = [
     }
   }
 
+  /* Responsivo */
   @media (max-width: 900px) {
     .sobre-grid {
       grid-template-columns: 1fr;
       gap: 3rem;
+    }
+
+    .divider-vertical {
+      display: none;
     }
 
     .sobre-texto {
@@ -361,26 +379,44 @@ const devops = [
       justify-content: center;
     }
 
-    .section-label-sobre::after {
-      content: "";
-      flex: 1;
-      height: 1px;
-      background: var(--border);
+    .stack-cols {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
     }
 
-    .section-label-stack::before {
-      content: "";
-      flex: 1;
-      height: 1px;
-      background: var(--border);
+    .col-overflow {
+      height: 200px;
     }
 
-    .divider-vertical {
+    .chip {
+      padding: 8px 10px;
+    }
+
+    .chip-name {
+      font-size: 0.65rem;
+    }
+
+    .chip-sub {
+      font-size: 0.55rem;
+    }
+
+    .col-title {
+      font-size: 0.6rem;
+      letter-spacing: 0.06em;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .chip-sub {
       display: none;
     }
 
-    .stack-cols {
-      height: 300px;
+    .chip {
+      padding: 6px 8px;
+    }
+
+    .chip-name {
+      font-size: 0.6rem;
     }
   }
 </style>
