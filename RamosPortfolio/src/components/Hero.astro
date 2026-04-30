@@ -66,9 +66,10 @@ const roles = ["Backend Developer", "C# .NET Dev", "Técnico em T.I"];
     max-width: 900px;
     width: 100%;
     display: grid;
-    grid-template-columns: 1fr auto;
+    grid-template-columns: 1fr;
     gap: 4rem;
     align-items: center;
+    text-align: center;
   }
 
   /* ── Typewriter label ── */
@@ -294,6 +295,7 @@ const roles = ["Backend Developer", "C# .NET Dev", "Técnico em T.I"];
     padding: 0;
     margin: 1.5rem 0 0;
     display: flex;
+    justify-content: center;
     flex-wrap: wrap;
     gap: 8px;
   }
@@ -332,16 +334,5 @@ const roles = ["Backend Developer", "C# .NET Dev", "Técnico em T.I"];
 
   .hero-btn:hover {
     background: color-mix(in srgb, var(--accent) 8%, transparent);
-  }
-
-  @media (max-width: 768px) {
-    .hero-content {
-      grid-template-columns: 1fr;
-      text-align: center;
-    }
-
-    .hero-stack {
-      justify-content: center;
-    }
   }
 </style>
