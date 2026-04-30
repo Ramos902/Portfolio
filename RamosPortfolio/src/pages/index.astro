@@ -4,9 +4,11 @@ import HeaderPortfolio from "../components/HeaderPortfolio.astro";
 import Hero from "../components/Hero.astro";
 import SobreStack from "../components/AboutStack.astro";
 import Projects from "../components/Projects.astro";
+
+const pageTitle = "Home";
 ---
 
-<Layout>
+<Layout title={pageTitle}>
     <HeaderPortfolio />
     <Hero />
     <SobreStack />

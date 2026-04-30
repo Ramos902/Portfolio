@@ -2,6 +2,9 @@
 import "../styles/global.css";
 import Loader from "../components/Loader.astro";
 import Footer from "../components/Footer.astro";
+
+const { title } = Astro.props;
+
 const base = import.meta.env.BASE_URL;
 ---
 
@@ -10,8 +13,20 @@ const base = import.meta.env.BASE_URL;
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
-		<link rel="icon" href={`${base}favicon.svg`} />
+
+		<title>{title} - Ramos Portfólio</title>
+		<meta name="description" content="Portfólio de João Pedro Ramos Moraes, Portfólio e Blog" />
+		<meta name="author" content="João Pedro Ramos Moraes" />
+		<meta name="robots" content="index, follow" />
+		<!-- Open Graph (aparece quando alguém compartilha o link) -->
+		<meta property="og:title" content="Ramos - Portfólio" />
+		<meta property="og:description" content="Portfólio e Blog Back-End Developer" />
+		<meta property="og:url" content="https://ramos902.github.io/portfolio/" />
+		<meta property="og:type" content="website" />
+
+		<link rel="icon" href={`${base}favicon-white.svg`} media="(prefers-color-scheme: light)">
+		<link rel="icon" href={`${base}favicon-black.svg`} media="(prefers-color-scheme: dark)">
+
 		<meta name="generator" content={Astro.generator} />
 		<title>Ramos Portfólio</title>
 	</head>
