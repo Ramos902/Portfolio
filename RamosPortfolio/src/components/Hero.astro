@@ -23,9 +23,6 @@ const roles = ["Backend Developer", "C# .NET Dev", "Técnico em T.I"];
       </ul>
       <a href="#projetos" class="btn hero-btn">Ver Projetos</a>
     </div>
-    <div class="hero-avatar">
-      <img src={avatarImg.src} alt="Foto Ramos" />
-    </div>
   </div>
 </section>
 
@@ -337,28 +334,10 @@ const roles = ["Backend Developer", "C# .NET Dev", "Técnico em T.I"];
     background: color-mix(in srgb, var(--accent) 8%, transparent);
   }
 
-  .hero-avatar {
-    width: 300px;
-    border-radius: 15%;
-    height: auto;
-    overflow: hidden;
-    flex-shrink: 0;
-  }
-
-  .hero-avatar img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
   @media (max-width: 768px) {
     .hero-content {
       grid-template-columns: 1fr;
       text-align: center;
-    }
-
-    .hero-avatar {
-      display: none;
     }
 
     .hero-stack {
