@@ -86,7 +86,9 @@ void recursaoInfinita() {    // cada chamada empilha um bloco na stack
 
 Referencias:
 
-- https://www.youtube.com/watch?v=Qve5f-PgQ18
-- https://www.programmerinterview.com/data-structures/difference-between-stack-and-heap/
-- https://stackoverflow.com/questions/79923/what-and-where-are-the-stack-and-heap
+- CODEVOLUTION. **Stack and Heap Memory in C**. YouTube, 2021. Disponível em: <https://www.youtube.com/watch?v=Qve5f-PgQ18>. Acesso em: 29 abr. 2025.
+
+- PROGRAMMER INTERVIEW. **Difference Between Stack and Heap**. Disponível em: <https://www.programmerinterview.com/data-structures/difference-between-stack-and-heap/>. Acesso em: 29 abr. 2025.
+
+- STACK OVERFLOW. **What and where are the stack and heap?**. Disponível em: <https://stackoverflow.com/questions/79923/what-and-where-are-the-stack-and-heap>. Acesso em: 29 abr. 2025.
 </aside>
