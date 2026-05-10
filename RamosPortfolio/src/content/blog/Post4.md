@@ -1,5 +1,5 @@
 ---
-postId: 3
+postId: 4
 title: "Stack e Heap - Gerenciamento de memória em C"
 description: "Entendendo as regiões de memória RAM com diagramas em C."
 date: 2025-05-10
