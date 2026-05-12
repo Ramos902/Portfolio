@@ -14,13 +14,13 @@ Uma lista é utilizada para inserir elementos dinamicamente na memória, de acor
 
 Podemos instanciar um vetor com tamanho 50 e utilizar apenas 10% de sua capacidade, desperdiçando os outros 90% de espaço na memória. Da mesma forma, caso utilizemos 100% da capacidade do vetor e precisemos armazenar mais elementos, não será possível expandi-lo diretamente.
 
-![image.png](image.png)
+![image.png](./assets/Post5/image.png)
 
 É nesse contexto que entram as listas. Com elas, podemos gerenciar a memória de forma dinâmica, alocando espaço conforme a utilização, sem a necessidade de definir previamente um tamanho fixo.
 
 Para formar uma lista, os objetos devem possuir um identificador que permita relacioná-los dentro da estrutura da lista. Para isso, utilizamos um atributo responsável por apontar para o próximo elemento. Quando esse atributo não aponta para nenhum outro elemento, significa que aquele é o último elemento da lista.
 
-![Exemplo gráfico de uma lista com objetos dinâmicos alocados em diferentes pontos da memória.](image0.png)
+![Exemplo gráfico de uma lista com objetos dinâmicos alocados em diferentes pontos da memória.](./assets/Post5/image0.png)
 
 Exemplo gráfico de uma lista com objetos dinâmicos alocados em diferentes pontos da memória.
 
@@ -50,7 +50,7 @@ Após a criação da estrutura Aluno, declaramos uma variável ponteiro do tipo 
 Aluno *cabeca = NULL;
 ```
 
-![Representação de diagrama na memória da criação da cabeça da lista. ](image1.png)
+![Representação de diagrama na memória da criação da cabeça da lista. ](./assets/Post5/image1.png)
 
 Representação de diagrama na memória da criação da cabeça da lista. 
 
@@ -69,7 +69,7 @@ void inserirAlunoInicio() {
 
 ```
 
-![Representação de diagrama da alocação da memória onde **`malloc(sizeof(Aluno))`** reserva espaço no heap e retorna o endereço para o ponteiro local `novo` guardar esse endereço. ](image2.png)
+![Representação de diagrama da alocação da memória onde **`malloc(sizeof(Aluno))`** reserva espaço no heap e retorna o endereço para o ponteiro local `novo` guardar esse endereço. ](./assets/Post5/image2.png)
 
 Representação de diagrama da alocação da memória onde **`malloc(sizeof(Aluno))`** reserva espaço no heap e retorna o endereço para o ponteiro local `novo` guardar esse endereço. 
 
@@ -112,7 +112,7 @@ void inserirAlunoInicio() {
 }
 ```
 
-![Representação de diagrama da inserção dos dados do novo Aluno.](image3.png)
+![Representação de diagrama da inserção dos dados do novo Aluno.](./assets/Post5/image3.png)
 
 Representação de diagrama da inserção dos dados do novo Aluno.
 
@@ -139,7 +139,7 @@ void inserirAlunoInicio() {
 }
 ```
 
-![Representação de diagrama da propriedade proximo recebendo o valor armazenado na cabeça da lista.](image4.png)
+![Representação de diagrama da propriedade proximo recebendo o valor armazenado na cabeça da lista.](./assets/Post5/image4.png)
 
 Representação de diagrama da propriedade proximo recebendo o valor armazenado na cabeça da lista.
 
@@ -167,13 +167,13 @@ void inserirAlunoInicio() {
 }
 ```
 
-![image.png](image5.png)
+![image.png](./assets/Post5/image5.png)
 
 ### 6. Finalizando InserirAlunoInicio()
 
 Ao finalizar a função `inserirAlunoInicio()`, a variável `Aluno *novo`, por estar dentro do escopo da função, é removida da Stack. Porém, a struct alocada com `malloc()` permanece na Heap, pois a memória continua sendo referenciada por `cabeca`.
 
-![image.png](image6.png)
+![image.png](./assets/Post5/image6.png)
 
 Assim finalizando a função inserindo o aluno dinamicamente na memória dentro da nossa lista.
 
@@ -181,4 +181,4 @@ Assim finalizando a função inserindo o aluno dinamicamente na memória dentro 
 
 Se 
 
-[gif.mp4](gif.mp4)
+[gif.mp4](./assets/Post5/gif.mp4)
