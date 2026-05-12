@@ -8,7 +8,7 @@ tags: ["C", "Estruturas De Dados", "Lista Encadeada", "Ponteiros"]
 
 # Aula 7 - Lista Simples
 
-Uma lista simples é uma estrutura de dados sequencial, podendo ser física na memória ou virtual. Quando definimos uma lista, cada objeto na memória, mesmo estando em posições diferentes, pode ser conectado ao próximo elemento por meio de uma propriedade que o identifica. Assim, definimos uma **lista simplesmente encadeada**.
+Uma lista simples é uma estrutura de dados sequencial, podendo ser física na memória ou virtual. Quando definimos uma lista, cada objeto na memória, mesmo estando em posições diferentes, pode ser conectado ao próximo elemento por meio de uma propriedade que o identifica. Assim, definimos uma **lista simples encadeada**.
 
 Uma lista é utilizada para inserir elementos dinamicamente na memória, de acordo com a necessidade de uso. Quando utilizamos um vetor, por exemplo, definimos previamente um espaço fixo na memória, ou seja, ao criá-lo, estabelecemos um tamanho específico e imutável para aquele vetor.
 
