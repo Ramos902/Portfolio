@@ -180,7 +180,7 @@ Assim finalizando a função inserindo o aluno dinamicamente na memória dentro 
 ## Exemplo em diagrama em uma lista de 3 elementos.
 
 <video autoplay loop muted playsinline width="100%">
-  <source src={`${import.meta.env.BASE_URL}assets/Post5/gif.mp4`} type="video/mp4" />
+  <source src="/portfolio/assets/Post5/gif.mp4" type="video/mp4" />
 </video>
 
 ## Código Utilizado de Refereência
