@@ -3,9 +3,13 @@ import "../styles/global.css";
 import Loader from "../components/Loader.astro";
 import Footer from "../components/Footer.astro";
 
-const { title } = Astro.props;
+const { title, description } = Astro.props;
 
 const base = import.meta.env.BASE_URL;
+
+const ogTitle = title ? `${title} - Ramos Portfólio` : "João Pedro Ramos - Desenvolvedor Backend .NET & C#";
+const ogDescription = description || "Portfólio de João Pedro Ramos, desenvolvedor backend com foco em .NET e C#. Experiência com APIs REST, PostgreSQL, Angular e Docker.";
+const ogUrl = Astro.url.href;
 ---
 
 <!doctype html>
@@ -19,14 +23,15 @@ const base = import.meta.env.BASE_URL;
 
 		<title>{title} - Ramos Portfólio</title>
 		<!-- SEO -->
-		<meta name="description" content="Portfólio de João Pedro Ramos, desenvolvedor backend com foco em .NET e C#. Experiência com APIs REST, PostgreSQL, Angular e Docker." />
+		<!-- SEO -->
+		<meta name="description" content={ogDescription} />
 		<meta name="robots" content="index, follow" />
 
 		<!-- Open Graph (WhatsApp, Discord, LinkedIn...) -->
-		<meta property="og:title" content="João Pedro Ramos - Desenvolvedor Backend .NET & C#" />
-		<meta property="og:description" content="Portfólio de João Pedro Ramos, desenvolvedor backend com foco em .NET e C#. Experiência com APIs REST, PostgreSQL, Angular e Docker." />
+		<meta property="og:title" content={ogTitle} />
+		<meta property="og:description" content={ogDescription} />
 		<meta property="og:image" content="https://ramos902.github.io/portfolio/og-image.png" />
-		<meta property="og:url" content="https://ramos902.github.io/portfolio/" />
+		<meta property="og:url" content={ogUrl} />
 		<meta property="og:type" content="website" />
 		<meta property="og:locale" content="pt_BR" />
 
