@@ -225,3 +225,7 @@ void main() {
     inserirAlunoInicio(); // Aluno 3
 }
 ```
+
+## Referências
+
+- SANTOS, Carlos Henrique da Silva. **Aula 7 - Lista Ligada Simples**. ITPESDD - Estrutura de Dados. Instituto Federal de São Paulo (IFSP), 2025.
