@@ -8,7 +8,7 @@ tags: ["C", "Estruturas De Dados", "Lista Encadeada", "Ponteiros"]
 
 # Aula 7 - Lista Simples (in progress)
 
-Uma lista simples nada mais é do que um vetor, podendo ser físico na memória ou virtual. Quando definimos uma lista, cada objeto na memória, mesmo estando em posições diferentes, pode ser conectado ao próximo elemento por meio de uma propriedade que o identifica. Assim, definimos uma lista simplesmente encadeada.
+Uma lista simples é uma estrutura de dados sequencial, podendo ser físico na memória ou virtual. Quando definimos uma lista, cada objeto na memória, mesmo estando em posições diferentes, pode ser conectado ao próximo elemento por meio de uma propriedade que o identifica. Assim, definimos uma lista simplesmente encadeada.
 
 Uma lista é utilizada para inserir elementos dinamicamente na memória, de acordo com a necessidade de uso. Quando utilizamos um vetor, por exemplo, definimos previamente um espaço fixo na memória, ou seja, ao criá-lo, estabelecemos um tamanho específico e imutável para aquele vetor.
 
@@ -85,7 +85,7 @@ void inserirAlunoInicio() {
     if (novo == NULL) {
         printf("Erro: sem memória!\n");
         return;
-      } 
+    } 
     ...
 }
 ```
@@ -102,10 +102,10 @@ void inserirAlunoInicio() {
     if (novo == NULL) {
         printf("Erro: sem memória!\n");
         return;
-      }
-      /* passo 3: captação dos dados */
-      printf("Insira o Nome do Aluno: ");
-    scanf("%s", &novo->nome);
+    }
+    /* passo 3: captação dos dados */
+    printf("Insira o Nome do Aluno: ");
+    scanf("%s", novo->nome);
     printf("Insira a Media do Aluno: ");
     scanf("%lf", &novo->media);
     ...
@@ -127,10 +127,10 @@ void inserirAlunoInicio() {
     if (novo == NULL) {
         printf("Erro: sem memória!\n");
         return;
-      }
-      /* passo 3: captação dos dados */
-      printf("Insira o Nome do Aluno: ");
-    scanf("%s", &novo->nome);
+    }
+    /* passo 3: captação dos dados */
+    printf("Insira o Nome do Aluno: ");
+    scanf("%s", novo->nome);
     printf("Insira a Media do Aluno: ");
     scanf("%lf", &novo->media);
     /* passo 4: novo aluno -> proximo recebe o endereço da antiga cabeça */
@@ -155,9 +155,9 @@ void inserirAlunoInicio() {
         printf("Erro: sem memória!\n");
         return;
       }
-      /* passo 3: captação dos dados */
-      printf("Insira o Nome do Aluno: ");
-    scanf("%s", &novo->nome);
+    /* passo 3: captação dos dados */
+    printf("Insira o Nome do Aluno: ");
+    scanf("%s", novo->nome);
     printf("Insira a Media do Aluno: ");
     scanf("%lf", &novo->media);
     /* passo 4: novo aluno -> proximo recebe o endereço da antiga cabeça */
@@ -179,6 +179,49 @@ Assim finalizando a função inserindo o aluno dinamicamente na memória dentro 
 
 ## Exemplo em diagrama em uma lista de 3 elementos.
 
-Se 
+<video autoplay loop muted playsinline width="100%">
+  <source src="/assets/Post5/gif.mp4" type="video/mp4" />
+</video>
 
-[gif.mp4](./assets/Post5/gif.mp4)
+## Código Utilizado de Refereência
+```c
+#include <stdlib.h>
+#include <stdio.h>
+
+typedef struct Aluno {
+    char nome[50];
+    double media;
+    struct Aluno *proximo;
+} Aluno;
+
+Aluno *cabeca = NULL;
+
+void inserirAlunoInicio() {
+    /* passo 1: aloca memória */
+    Aluno *novo = (Aluno *) malloc(sizeof(Aluno));
+
+    /* passo 2: verifica se alocação ocorreu */
+    if (novo == NULL) {
+        printf("Erro: sem memória!\n");
+        return;
+    }
+
+    /* passo 3: captação dos dados */
+    printf("Insira o Nome do Aluno: ");
+    scanf("%s", novo->nome);
+    printf("Insira a Media do Aluno: ");
+    scanf("%lf", &novo->media);
+
+    /* passo 4: novo->proximo recebe o endereço da antiga cabeça */
+    novo->proximo = cabeca;
+
+    /* passo 5: cabeça passa a ser o novo aluno */
+    cabeca = novo;
+}
+
+void main() {
+    inserirAlunoInicio(); // Aluno 1
+    inserirAlunoInicio(); // Aluno 2
+    inserirAlunoInicio(); // Aluno 3
+}
+```
